@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div id="login-page" class="page active">
+        <div class="container">
+            <h1>Course Management System</h1>
+            <p class="department">Department of Computer Science</p>
+            <p class="welcome">Welcome to BSCS Course Portal</p>
+            
+            <div class="form-container">
+                <div class="input-group">
+                    <label>Registration Number</label>
+                    <input type="text" id="login-reg-number" placeholder="e.g., BSCS-2023-001">
+                </div>
+                
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password">
+                </div>
+                
+                <button class="login-btn" id="login-button">Login</button>
+                
+                <div id="error-message" class="error-message hidden">
+                    <p><strong>Login Failed!</strong></p>
+                    <p>No account found with these credentials.</p>
+                    <p class="create-account-link">Click here to create a new account ...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="create-account-page" class="page">
+        <div class="container">
+            <h1>Course Management System</h1>
+            
+            <div class="form-container">
+                <h2>Create Account</h2>
+                
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="full-name" placeholder="Enter your full name">
+                    <span class="validation-message" id="name-validation"></span>
+                </div>
+                
+                <div class="input-group">
+                    <label>Registration Number</label>
+                    <input type="text" id="reg-number" placeholder="e.g., BSCS-2023-001">
+                    <span class="validation-message" id="reg-validation"></span>
+                </div>
+                
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Create a password">
+                    <span class="validation-message" id="password-validation"></span>
+                </div>
+                
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password">
+                    <span class="validation-message" id="confirm-validation"></span>
+                </div>
+                
+                <div class="input-group">
+                    <label>I am a</label>
+                    <select id="role">
+                        <option value="" disabled selected>Select role</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+
+                <div class="input-group" id="semester-group" style="display: none;">
+                    <label>Select Semester</label>
+                    <select id="semester">
+                        <option value="" disabled selected>Select semester</option>
+                        <option value="BCS-I">Semester 1</option>
+                        <option value="BCS-II">Semester 2</option>
+                        <option value="BCS-III">Semester 3</option>
+                        <option value="BCS-IV">Semester 4</option>
+                        <option value="BCS-V">Semester 5</option>
+                        <option value="BCS-VI">Semester 6</option>
+                        <option value="BCS-VII">Semester 7</option>
+                        <option value="BCS-VIII">Semester 8</option>
+                    </select>
+                </div>
+                
+                <button class="login-btn" id="create-account-btn">Create Account</button>
+                
+                <p class="switch-page">Already have an account? <a href="#" id="go-to-login">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="student-portal" class="page">
+        <div class="portal-header">
+            <h1>Student Portal</h1>
+            <div class="student-info">
+                <span id="student-display-name">hi</span> - <span id="student-semester">BCS-I</span>
+                <button id="logout-student" class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <div class="portal-nav">
+            <button class="nav-btn active" data-page="courses">My Courses</button>
+            <button class="nav-btn" data-page="profile">My Profile</button>
+        </div>
+
+        <div id="courses-page" class="portal-page active">
+            <div class="courses-section">
+                
+                <div style="margin-bottom: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px; border: 1px solid #bbdefb;">
+                    <h3 style="margin-top: 0; color: #1565c0;">📊 Analytics Dashboard</h3>
+                    <p>Filter courses with High Credit Hours (2+)</p>
+                    <button onclick="runAggregation()" style="background: #673ab7; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%;">
+                        🔍 Run MongoDB Aggregation
+                    </button>
+                    <ul id="agg-list" style="margin-top: 10px; background: white; padding: 10px; list-style: none; border-radius: 4px; min-height: 10px;"></ul>
+                </div>
+                <h2>My Enrolled Courses</h2>
+                <div id="enrolled-courses" class="courses-container">
+                    <p class="no-courses">No courses enrolled yet. Enroll in courses below to get started!</p>
+                </div>
+
+                <h2>Available Courses (<span id="current-semester">Semester 1</span>)</h2>
+                <div id="available-courses" class="courses-container">
+                </div>
+            </div>
+        </div>
+
+        <div id="profile-page" class="portal-page">
+            <div class="profile-section">
+                <h2>My Profile</h2>
+                <div class="profile-info">
+                    <div class="profile-item">
+                        <strong>Name:</strong>
+                        <span id="profile-name">hi</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Registration Number:</strong>
+                        <span id="profile-reg-number">22</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Role:</strong>
+                        <span id="profile-role">Student</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Current Semester:</strong>
+                        <span id="profile-semester">BCS-I</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Enrolled Courses:</strong>
+                        <span id="profile-courses-count">0</span>
+                    </div>
+                </div>
+
+                <h2>My Courses</h2>
+                <div id="profile-courses" class="courses-container">
+                    <p class="no-courses">No courses enrolled yet.</p>
+                </div>
+
+                <hr>
+
+                <div class="back-to-courses">
+                    <button id="back-to-courses-btn" class="back-btn">Back to Courses</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="teacher-portal" class="page">
+        <div class="portal-header">
+            <h1>Teacher Portal</h1>
+            <div class="teacher-info">
+                <span id="teacher-display-name">Teacher</span>
+                <button id="logout-teacher" class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <div class="portal-nav">
+            <button class="nav-btn active" data-page="teacher-courses">My Courses</button>
+            <button class="nav-btn" data-page="teacher-profile">My Profile</button>
+        </div>
+
+        <div id="teacher-courses-page" class="portal-page active">
+            <div class="courses-section">
+                <h2>My Teaching Courses (<span id="teaching-courses-count">0</span>)</h2>
+                <div id="teaching-courses" class="courses-container">
+                    <p class="no-courses">No courses assigned for teaching yet. Enroll in courses from the available list below.</p>
+                </div>
+
+                <div id="available-courses" class="courses-container">
+                </div>
+            </div>
+        </div>
+
+        <div id="teacher-profile-page" class="portal-page">
+            <div class="profile-section">
+                <h2>My Profile</h2>
+                <div class="profile-info">
+                    <div class="profile-item">
+                        <strong>Name:</strong>
+                        <span id="teacher-profile-name">Teacher</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Registration Number:</strong>
+                        <span id="teacher-profile-reg-number">T-001</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Role:</strong>
+                        <span id="teacher-profile-role">Teacher</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Teaching Courses:</strong>
+                        <span id="teacher-courses-count-profile">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeCourseModal()">&times;</span>
+        <h3 id="modal-course-title"></h3>
+        <p class="modal-course-code" id="modal-course-code"></p>
+        <p class="modal-course-credits" id="modal-course-credits"></p>
+        
+        <div id="video-container" style="margin: 15px 0; display: none;">
+            <iframe id="youtube-player" width="100%" height="315" src="" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <hr>
+        <h4>Course Description</h4>
+        <p id="modal-course-description"></p>
+        <hr>
+        <button class="download-btn" id="download-description-btn">Download Description (PDF)</button>
+    </div>
+</div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
