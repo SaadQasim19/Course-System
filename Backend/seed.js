@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-mongoose.connect('mongodb://127.0.0.1:27017/courseSystem')
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to MongoDB for Seeding"))
     .catch(err => console.log("Connection Error:", err));
 
