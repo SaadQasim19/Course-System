@@ -1,29 +1,22 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // --- Database Connection ---
-// Option 1: Local MongoDB (requires MongoDB installation)
-// mongoose.connect('mongodb://127.0.0.1:27017/courseSystem')
-
-// Option 2: MongoDB Atlas (Cloud - Free tier available)
-// Replace <your-connection-string> with your MongoDB Atlas connection string
-// mongoose.connect('mongodb+srv://username:password@cluster.mongodb.net/courseSystem')
-
-// Current: Local MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/courseSystem')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("✅ MongoDB Connected Successfully!"))
   .catch(err => {
     console.log("❌ MongoDB Connection Error:", err.message);
-    console.log("💡 Tip: Make sure MongoDB is installed and running!");
-    console.log("   Download: https://www.mongodb.com/try/download/community");
   });
 
 // --- Database Schemas ---
@@ -93,18 +86,22 @@ app.get('/analytics/high-credits', async (req, res) => {
 app.post('/register', async (req, res) => {
     try {
         const { fullName, regNumber, password, role, semester } = req.body;
+        console.log('📝 Registration attempt:', { fullName, regNumber, role, semester });
         
         // Check duplicate user
         const existingUser = await User.findOne({ regNumber });
         if (existingUser) {
+            console.log('❌ Duplicate user found');
             return res.status(400).json({ message: "User with this Reg Number already exists!" });
         }
 
         const newUser = new User({ fullName, regNumber, password, role, semester });
         await newUser.save();
+        console.log('✅ User created successfully:', regNumber);
         
         res.status(201).json({ message: "Account created successfully" });
     } catch (err) {
+        console.log('❌ Registration error:', err);
         res.status(500).json({ error: err.message });
     }
 });
