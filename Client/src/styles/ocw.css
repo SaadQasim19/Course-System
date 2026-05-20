@@ -1,0 +1,619 @@
+/* Open Courseware layout — light gray bg, white panels, blue accents, orange actions */
+
+.ocw-app {
+    min-height: 100vh;
+    background: #e8e8e8;
+    color: #333;
+}
+
+.ocw-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+}
+
+/* Top navbar */
+.ocw-topnav {
+    background: #2c3e50;
+    color: #fff;
+}
+
+.ocw-topnav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    min-height: 42px;
+}
+
+.ocw-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    list-style: none;
+}
+
+.ocw-nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s, background 0.2s;
+}
+
+.ocw-nav-links a:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.ocw-nav-links a.active {
+    color: #4da3ff;
+    border-bottom: 3px solid #4da3ff;
+}
+
+.ocw-auth-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.ocw-auth-link:hover {
+    color: #4da3ff;
+}
+
+.ocw-user-menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.ocw-user-menu button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.ocw-user-menu button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Banner */
+.ocw-banner {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+}
+
+.ocw-banner-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 120px 1fr 280px;
+    align-items: center;
+    gap: 20px;
+}
+
+.ocw-logo {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #1a5fb4 0%, #3584e4 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -1px;
+    box-shadow: 0 4px 12px rgba(26, 95, 180, 0.35);
+}
+
+.ocw-banner-title {
+    text-align: center;
+}
+
+.ocw-banner-title h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #1a365d;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.ocw-banner-title p {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #555;
+    margin-top: 6px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.ocw-search-box {
+    display: flex;
+    gap: 0;
+}
+
+.ocw-search-box input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #bbb;
+    border-right: none;
+    font-size: 14px;
+}
+
+.ocw-search-box input:focus {
+    outline: none;
+    border-color: #1a5fb4;
+}
+
+.ocw-btn-find {
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ocw-btn-find:hover {
+    background: #d35400;
+}
+
+/* Breadcrumb */
+.ocw-breadcrumb {
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    font-size: 13px;
+}
+
+.ocw-breadcrumb-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.ocw-breadcrumb a {
+    color: #1a5fb4;
+    text-decoration: none;
+}
+
+.ocw-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.ocw-breadcrumb span.sep {
+    margin: 0 8px;
+    color: #888;
+}
+
+.ocw-breadcrumb span.current {
+    color: #555;
+}
+
+/* Two-column layout */
+.ocw-two-col {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+    margin-top: 24px;
+    align-items: start;
+}
+
+.ocw-sidebar {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0;
+}
+
+.ocw-sidebar-nav {
+    list-style: none;
+}
+
+.ocw-sidebar-nav a,
+.ocw-sidebar-nav button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.ocw-sidebar-nav a:hover,
+.ocw-sidebar-nav button:hover {
+    background: #f0f7ff;
+    color: #1a5fb4;
+}
+
+.ocw-sidebar-nav a.active,
+.ocw-sidebar-nav button.active {
+    background: #e8f2fc;
+    color: #1a5fb4;
+    font-weight: 600;
+    border-left: 4px solid #1a5fb4;
+}
+
+.ocw-featured {
+    margin-top: 20px;
+    padding: 16px;
+    background: #f9f9f9;
+    border-top: 1px solid #ddd;
+}
+
+.ocw-featured h4 {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a5fb4;
+    margin-bottom: 12px;
+}
+
+.ocw-featured a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 0;
+}
+
+.ocw-featured a::before {
+    content: '▸ ';
+    color: #e67e22;
+}
+
+.ocw-featured a:hover {
+    color: #1a5fb4;
+}
+
+/* Main panel */
+.ocw-panel {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 28px 32px;
+}
+
+.ocw-panel h2 {
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a365d;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.ocw-home-hero {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 40px;
+    margin-top: 24px;
+}
+
+.ocw-home-hero h2 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a365d;
+    margin-bottom: 16px;
+}
+
+/* Course grid */
+.ocw-course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.ocw-listing-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.ocw-listing-card:hover {
+    border-color: #1a5fb4;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.ocw-listing-card .code {
+    font-weight: 700;
+    color: #1a5fb4;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+.ocw-listing-card .title {
+    margin: 8px 0;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.ocw-listing-card .meta {
+    font-size: 13px;
+    color: #666;
+}
+
+/* Course detail */
+.ocw-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.ocw-detail-header h1 {
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a365d;
+    margin: 0;
+    flex: 1;
+}
+
+.ocw-btn-like {
+    background: #fff;
+    border: 2px solid #e67e22;
+    color: #e67e22;
+    padding: 8px 16px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.ocw-btn-like:hover {
+    background: #fff8f0;
+}
+
+.ocw-btn-like.liked {
+    background: #e67e22;
+    color: #fff;
+}
+
+.ocw-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+.ocw-info-table td {
+    padding: 10px 0;
+    vertical-align: top;
+    border: none;
+}
+
+.ocw-info-table td.label {
+    width: 180px;
+    color: #1a5fb4;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.ocw-info-table td.value {
+    color: #333;
+    font-size: 14px;
+}
+
+.ocw-instructor-sub {
+    display: block;
+    color: #666;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.ocw-divider {
+    border: none;
+    border-top: 2px solid #e0e0e0;
+    margin: 24px 0;
+}
+
+.ocw-contents h3 {
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a365d;
+    margin-bottom: 16px;
+}
+
+.ocw-contents-list {
+    padding-left: 24px;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.ocw-contents-list.scrollable {
+    max-height: 420px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    padding: 16px 16px 16px 40px;
+    background: #fafafa;
+}
+
+/* Static pages */
+.ocw-static h2 {
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a365d;
+    margin: 24px 0 12px;
+}
+
+.ocw-static p {
+    line-height: 1.7;
+    margin-bottom: 12px;
+    color: #444;
+}
+
+.ocw-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 20px;
+}
+
+.ocw-contact-info {
+    background: #f9f9f9;
+    padding: 24px;
+    border: 1px solid #ddd;
+}
+
+/* Auth page */
+.ocw-auth-wrap {
+    max-width: 480px;
+    margin: 40px auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 32px;
+}
+
+.ocw-auth-tabs {
+    display: flex;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #eee;
+}
+
+.ocw-auth-tabs button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #666;
+}
+
+.ocw-auth-tabs button.active {
+    color: #1a5fb4;
+    border-bottom: 3px solid #1a5fb4;
+    margin-bottom: -2px;
+}
+
+.ocw-auth-wrap .input-group {
+    margin-bottom: 18px;
+}
+
+.ocw-auth-wrap label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.ocw-auth-wrap input,
+.ocw-auth-wrap select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.ocw-btn-primary {
+    width: 100%;
+    background: #e67e22;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.ocw-btn-primary:hover {
+    background: #d35400;
+}
+
+.ocw-portal-note {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+    font-size: 13px;
+    text-align: center;
+}
+
+.ocw-portal-note a {
+    color: #1a5fb4;
+}
+
+.ocw-empty {
+    text-align: center;
+    padding: 48px;
+    color: #666;
+    font-style: italic;
+}
+
+.ocw-section-block h3 {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #1a365d;
+    margin-bottom: 12px;
+}
+
+.ocw-section-block ul {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.ocw-section-block a {
+    color: #1a5fb4;
+}
+
+@media (max-width: 900px) {
+    .ocw-banner-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .ocw-logo {
+        margin: 0 auto;
+    }
+
+    .ocw-two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .ocw-contact-grid {
+        grid-template-columns: 1fr;
+    }
+}

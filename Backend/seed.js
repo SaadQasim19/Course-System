@@ -7,15 +7,84 @@ mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to MongoDB for Seeding"))
     .catch(err => console.log("Connection Error:", err));
 
+const InstructorSchema = new mongoose.Schema({
+    name: String,
+    qualification: String,
+    university: String
+}, { _id: false });
+
 const CourseSchema = new mongoose.Schema({
     code: String,
     title: String,
     credits: String,
     description: String,
-    semester: String
+    semester: String,
+    videoLink: String,
+    category: String,
+    level: String,
+    prerequisites: String,
+    instructor: InstructorSchema,
+    contents: [String],
+    overview: String,
+    relatedLinks: [{ title: String, url: String }],
+    referenceBooks: [String],
+    lectureVideos: [{ title: String, url: String }],
+    assignments: [String],
+    gradingScheme: String,
+    visitCount: { type: Number, default: 0 },
+    likeCount: { type: Number, default: 0 }
 });
 
 const Course = mongoose.model('Course', CourseSchema);
+
+const buildLectureTopics = (code, title, count = 24) => {
+    const topics = [];
+    for (let i = 1; i <= count; i += 1) {
+        topics.push(`Lecture ${i}: ${title} — Topic ${i}`);
+    }
+    return topics;
+};
+
+const enrichCourse = (course, index) => ({
+    ...course,
+    category: course.code.startsWith('CSC') || course.code.startsWith('AIC')
+        ? 'Computer Science'
+        : course.code.startsWith('MTH') ? 'Mathematics'
+        : course.code.startsWith('HUM') ? 'Humanities'
+        : course.code.startsWith('MGT') ? 'Management'
+        : 'General',
+    level: course.semester,
+    prerequisites: index > 0 ? 'As per BSCS program roadmap' : 'None',
+    instructor: {
+        name: 'Dr. Faculty Member',
+        qualification: 'Ph.D. in relevant discipline',
+        university: 'Virtual University of Pakistan'
+    },
+    overview: course.description,
+    contents: buildLectureTopics(course.code, course.title),
+    relatedLinks: [
+        { title: 'VU Learning Management System', url: 'https://www.vu.edu.pk' },
+        { title: 'Course Announcements Forum', url: 'https://www.vu.edu.pk' }
+    ],
+    referenceBooks: [
+        `Primary textbook for ${course.title}`,
+        'Supplementary readings provided on LMS'
+    ],
+    lectureVideos: [
+        { title: `Introduction to ${course.title}`, url: course.videoLink || 'https://www.youtube.com' },
+        { title: 'Midterm Review Session', url: 'https://www.youtube.com' }
+    ],
+    assignments: [
+        'Assignment 01 — Conceptual Questions',
+        'Assignment 02 — Practical Problems',
+        'Graded Quiz — Week 6',
+        'Final Project / Term Report'
+    ],
+    gradingScheme: 'Assignments 20% | Midterm 30% | Final Exam 50%',
+    visitCount: Math.floor(Math.random() * 500) + 50,
+    likeCount: Math.floor(Math.random() * 120) + 10,
+    videoLink: course.videoLink || 'https://www.youtube.com'
+});
 
 const courses = [
     // BCS-I
@@ -84,7 +153,8 @@ const seedDB = async () => {
         await Course.deleteMany({}); 
         console.log("✅ Old courses cleared.");
         
-        await Course.insertMany(courses);
+        const enriched = courses.map((course, index) => enrichCourse(course, index));
+        await Course.insertMany(enriched);
         console.log("✅ All courses added successfully!");
         
         mongoose.connection.close();

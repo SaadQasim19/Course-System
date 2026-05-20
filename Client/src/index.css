@@ -6,16 +6,28 @@
 }
 
 body {
+    background: #e8e8e8;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+body.portal-mode {
     background: linear-gradient(135deg, #dee2ff 0%, #c5ccf7 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     padding: 20px;
 }
 
 #root {
     width: 100%;
+}
+
+.portal-shell {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #dee2ff 0%, #c5ccf7 100%);
 }
 
 .page {

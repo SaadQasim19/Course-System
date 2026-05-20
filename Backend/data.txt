@@ -1,0 +1,8 @@
+Course_Management 
+
+CourseCluster
+
+CourseUser
+CourseU$er_123
+
+mongodb+srv://CourseUser:<CourseU$er_123>@coursecluster.2rv5i7q.mongodb.net/?appName=CourseCluster

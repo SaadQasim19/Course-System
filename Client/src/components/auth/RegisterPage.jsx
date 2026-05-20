@@ -37,7 +37,7 @@ export const RegisterPage = () => {
         try {
             await courseApi.register(userData);
             alert('Account Created');
-            navigate('/');
+            navigate('/login');
         } catch (err) {
             alert(err.message);
         }
@@ -127,7 +127,7 @@ export const RegisterPage = () => {
                         <button type="submit" className="login-btn">Create Account</button>
                         
                         <p className="switch-page">
-                            Already have an account? <Link to="/">Login</Link>
+                            Already have an account? <Link to="/login">Login</Link>
                         </p>
                     </form>
                 </div>
